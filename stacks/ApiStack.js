@@ -10,6 +10,9 @@ export function ApiStack({ stack, app }) {
       authorizer: "iam", //tells our API that we want to use AWS_IAM across all our routes
       function: {
         bind: [table],
+        environment: {
+          STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+        },
       },
     },
     routes: {
@@ -17,6 +20,7 @@ export function ApiStack({ stack, app }) {
       "GET /notes/{id}": "packages/functions/src/get.main",
       "GET /notes": "packages/functions/src/list.main",
       "DELETE /notes/{id}": "packages/functions/src/delete.main",
+      "POST /billing": "packages/functions/src/billing.main",
     },
   });
 
