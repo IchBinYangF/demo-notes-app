@@ -7,6 +7,7 @@ export function ApiStack({ stack, app }) {
   // Create the API
   const api = new Api(stack, "Api", {
     defaults: {
+      authorizer: "iam", //tells our API that we want to use AWS_IAM across all our routes
       function: {
         bind: [table],
       },
